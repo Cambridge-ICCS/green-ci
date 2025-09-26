@@ -6,4 +6,4 @@ If you have suggestions, please open an issue and create a pull request. Our mai
 
 At this point, we do not have any coding standards that we enforce - we are happy about any best-effort contributions and will attempt to give useful feedback to improve contributions where appropriate.
 
-We politely ask you to not add LLM-generated content to this repository.
+We politely ask you to not add non-reviewed (verified by a human) LLM-generated content to this repository.
