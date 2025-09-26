@@ -208,7 +208,21 @@ change.
 
 ### Skip CI
 
-*Work in progress* (https://github.com/Cambridge-ICCS/green-ci/issues/23)
+GitHub Actions supports manually skipping of CI workflows that would be
+triggered by `push` or `pull_request` by including any of the following strings
+in a commit message:
+* `[skip ci]`
+* `[ci skip]`
+* `[no ci]`
+* `[skip actions]`
+* `[actions skip]`
+The same warning applies as mentioned in the [Triggers](#triggers) section. As
+such, you should not use this notation in the final commit included in a PR
+before requesting reviews.
+
+See the
+[GitHub documentation page](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/skip-workflow-runs)
+for more details.
 
 ### Test PRs
 
