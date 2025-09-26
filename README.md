@@ -26,6 +26,14 @@ that can help you make your software development practices greener.
 
 ## Best practices
 
+Contents
+* [Time limits](#time-limits)
+* [Concurrency](#concurrency)
+* [Triggers][#triggers]
+* [Separation of concerns](#separation-of-concerns)
+* [Skip CI](#skip-ci)
+* [Test PRs](#test-prs)
+
 ### Time limits
 
 By default, a job will continue running for 360 minutes (6 hours) before being
@@ -188,6 +196,10 @@ change.
 > In some cases it can be a good thing for contributors to edit multiple
 > different types of files in the same change. For example, it is good practice
 > to update documentation in line with changes to source code.
+
+### Skip CI
+
+*Work in progress* (https://github.com/Cambridge-ICCS/green-ci/issues/23)
 
 ### Test PRs
 
