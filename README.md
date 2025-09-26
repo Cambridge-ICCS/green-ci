@@ -33,6 +33,7 @@ Contents
 * [Separation of concerns](#separation-of-concerns)
 * [Skip CI](#skip-ci)
 * [Test PRs](#test-prs)
+* [Rerun only failed tests](#rerun-only-failed-tests)
 
 ### Time limits
 
@@ -60,7 +61,9 @@ happen due to:
    resource, hardware malfunction, cosmic ray). In such cases, it may be
    sufficient to retry the workflow manually by clicking the red cross
    indicating the workflow failure, selecting the offending job, and clicking
-   the 'Re-run jobs' button near the top of the page.
+   the 'Re-run jobs' button near the top of the page. Then select 'Re-run failed
+   jobs'. (See the [Rerun only failed tests](#rerun-only-failed-tests) for more
+   details.)
 2. The job has stalled due to an issue on your branch. Addressing this will
    require [debugging](#debugging) your change.
 3. You made a change that just causes your tests or docs build to require longer
@@ -223,6 +226,18 @@ before requesting reviews.
 See the
 [GitHub documentation page](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/skip-workflow-runs)
 for more details.
+
+### Rerun only failed tests
+
+When re-running tests in GitHub Actions from the
+[Actions](https://github.com/Cambridge-ICCS/green-ci/actions) tab, there are two
+options: 'Re-run all tests' and 'Re-run failed tests'. The latter option is the
+more energy efficient and so is preferred.
+
+Some testing frameworks support similar features when running tests locally. For
+example, Pytest has `pytest --last-failed` (or `pytest --lf`) and CTest has
+`ctest --rerun-failed`. These can cut down both the energy consumption and
+turn-around time when debugging code or test changes.
 
 ## Debugging
 
