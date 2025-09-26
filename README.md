@@ -224,13 +224,15 @@ See the
 [GitHub documentation page](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/skip-workflow-runs)
 for more details.
 
-### Test PRs
-
-*Work in progress* (https://github.com/Cambridge-ICCS/green-ci/issues/5)
-
 ## Debugging
 
 If your code fails during a CI run, it sometimes can be hard to find the issue without trying and pushing a series of fixes, which in turn will trigger the CI to run each time - and thus waste energy.
 If the issue is not in the test suite which can be easily rerun (for example, using [pytest](https://docs.pytest.org/), a tool like [act](https://github.com/nektos/act) can be used to run your CI pipeline locally in a container.
 
 Alternatively, you can interact with your GitHub actions using [action-tmate](https://github.com/mxschmitt/action-tmate) (with tmate being a fork of [tmux](https://github.com/tmux/tmux/wiki)). This enables you to use ssh to connect with the machine that the actions are run on.
+
+### Test PRs
+
+If you have set up [triggers](#triggers) properly, you should look at the way you are debugging/changing PRs. Rather than making small changes to a big PR and checking whether your CI runs through, it can be more energy efficient to separate out a smaller PR with just those changes. This will then (hopefully) trigger a smaller set of tests being rerun instead of all those that were affected in the big PR. 
+
+
