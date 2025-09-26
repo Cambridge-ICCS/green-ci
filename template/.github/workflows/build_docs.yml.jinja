@@ -1,0 +1,50 @@
+# Workflow to build and deploy docs for the project
+name: BuildDocs
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on pushes to the "main" branch, i.e., PR merges
+  push:
+    branches: [ "main" ]
+
+  # Triggers the workflow on pushes to open pull requests to main with documentation changes
+  pull_request:
+    branches: [ "main" ]
+    paths: {{ build_docs_triggers }}
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Helps prevent parallel runs of the workflow from overlapping
+concurrency:
+  group: {% raw %}${{ github.workflow }}-${{ github.ref }}{% endraw %}
+  cancel-in-progress: true
+
+# Workflow run - one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build-docs"
+  build-docs:
+    # The timeout minutes for the job to complete
+    timeout-minutes: {{ build_docs_timeout }}
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      {%- if carbon_aware -%}
+      {% raw %}
+      - name: Start Measurement
+        uses: green-coding-solutions/eco-ci-energy-estimation@v4 # use hash or @vX here (See note below)
+        with:
+          task: start-measurement
+        continue-on-error: true
+
+      # TODO: Add your other steps here
+
+      - name: Show Energy Results
+        uses: green-coding-solutions/eco-ci-energy-estimation@v4 # use hash or @vX here (See note below)
+        with:
+          task: display-results
+        continue-on-error: true
+      {% endraw %}
+      {%- endif -%}
