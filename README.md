@@ -146,6 +146,15 @@ on:
 for source code with extension `.c`, header files with extension `.h`, and CMake
 build files.
 
+> [!WARNING]
+> Often administrators configure repository settings such that certain (or all)
+> workflows are required to pass (on the latest commit) before a PR is merged.
+> In this case, untriggered workflows can become problematic. One way to get
+> around this issue is to include `pull_request_review` triggers to any
+> workflows that need to be run before merging so that they are triggered
+> whenever a review is received. A downside of this workaround is that it can
+> itself lead to unnecessary workflow runs.
+
 ### Separation of concerns
 
 The information on [triggers](#triggers) above is useful but what if you have
