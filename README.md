@@ -11,20 +11,25 @@ reliable CI processes.
 
 ## Existing Literature
 
-There are a couple of studies on this topic, for example [Carbon Awareness in CI/CD by Classen et al](https://arxiv.org/abs/2310.18718)
-and [Carbon-Aware Continuous Integration: Reducing Emissions Without Sacrificing Performance by Laskar](https://lorojournals.com/index.php/emsj/article/view/1581).
-These mostly rely on scheduling workloads for low-carbon times or shifting to low-carbon locations, as well as reducing overhead in the workloads (e.g., through
-minimisation of unnecessary runs and builds).
+There are a couple of studies on this topic, for example
+[Carbon Awareness in CI/CD by Classen et al](https://arxiv.org/abs/2310.18718)
+and
+[Carbon-Aware Continuous Integration: Reducing Emissions Without Sacrificing Performance by Laskar](https://lorojournals.com/index.php/emsj/article/view/1581).
+These mostly rely on scheduling workloads for low-carbon times or shifting to
+low-carbon locations, as well as reducing overhead in the workloads (e.g.,
+through minimisation of unnecessary runs and builds).
 
 Tool like [Eco CI](https://github.com/green-coding-solutions/eco-ci-energy-estimation) can help measuring/estimating the energy consumption of CI/CD runs which can help 
-making informed decisions about adapting the runs. There are [a range of other tools](https://github.blog/open-source/social-impact/the-10-best-tools-to-green-your-software/) out there
-that can help you make your software development practices greener.
+making informed decisions about adapting the runs. There are
+[a range of other tools](https://github.blog/open-source/social-impact/the-10-best-tools-to-green-your-software/)
+out there that can help you make your software development practices greener.
 
 ## Usage
 
 This repository provides templates for GitHub Actions workflows that can be
-used as a starting point for implementing green software engineering practices in CI pipelines.
-To use the templates, use [`copier`](https://copier.readthedocs.io/en/stable/) with instructions below.
+used as a starting point for implementing green software engineering practices
+in CI pipelines. To use the templates, use
+[`copier`](https://copier.readthedocs.io/en/stable/) with instructions below.
 You can then modify the workflow files to suit your specific needs,
 such as changing the triggers, adding or removing jobs, and adjusting the time
 limits.
@@ -35,9 +40,10 @@ You will need to `pip install copier`, then you can create a new module via:
 copier copy https://github.com/Cambridge-ICCS/green-ci.git /path/to/my-project
 ```
 
-*Note that you will be prompted to enter some information,
-such as the triggers for the workflow, the timeout limits, and whether
-this workflow should be carbon aware (extra monitoring for energy usage).*
+> [!NOTE]
+> You will be prompted to enter some information, such as the triggers for the
+> workflow, the timeout limits, and whether this workflow should be carbon aware
+> (extra monitoring for energy usage).
 
 You can also use it via `uvx copier` if you have [`uv`](https://docs.astral.sh/uv/) installed.
 
@@ -163,8 +169,8 @@ on:
       - '**.h'
       - '**CMakeLists.txt'
 ```
-for source code with extension `.c`, header files with extension `.h`, and CMake
-build files.
+for source code with extension `.c`, header files with extension `.h`, and
+[CMake](https://cmake.org/) build files.
 
 > [!WARNING]
 > Often administrators configure repository settings such that certain (or all)
@@ -252,17 +258,32 @@ options: 'Re-run all tests' and 'Re-run failed tests'. The latter option is the
 more energy efficient and so is preferred.
 
 Some testing frameworks support similar features when running tests locally. For
-example, Pytest has `pytest --last-failed` (or `pytest --lf`) and CTest has
+example, [Pytest](https://docs.pytest.org/) has `pytest --last-failed` (or
+`pytest --lf`) and
+[CTest](https://cmake.org/cmake/help/latest/manual/ctest.1.html) has
 `ctest --rerun-failed`. These can cut down both the energy consumption and
 turn-around time when debugging code or test changes.
 
 ## Debugging
 
-If your code fails during a CI run, it sometimes can be hard to find the issue without trying and pushing a series of fixes, which in turn will trigger the CI to run each time - and thus waste energy.
-If the issue is not in the test suite which can be easily rerun (for example, using [pytest](https://docs.pytest.org/), a tool like [act](https://github.com/nektos/act) can be used to run your CI pipeline locally in a container.
+If your code fails during a CI run, it sometimes can be hard to find the issue
+without trying and pushing a series of fixes, which in turn will trigger the CI
+to run each time - and thus waste energy. If the issue is not in the test suite
+which can be easily rerun (for example, using
+[Pytest](https://docs.pytest.org/), a tool like
+[act](https://github.com/nektos/act) can be used to run your CI pipeline locally
+in a container.
 
-Alternatively, you can interact with your GitHub actions using [action-tmate](https://github.com/mxschmitt/action-tmate) (with tmate being a fork of [tmux](https://github.com/tmux/tmux/wiki)). This enables you to use ssh to connect with the machine that the actions are run on.
+Alternatively, you can interact with your GitHub actions using
+[action-tmate](https://github.com/mxschmitt/action-tmate) (with tmate being a
+fork of [tmux](https://github.com/tmux/tmux/wiki)). This enables you to use ssh
+to connect with the machine that the actions are run on.
 
 ### Test PRs
 
-If you have set up [triggers](#triggers) properly, you should look at the way you are debugging/changing PRs. Rather than making small changes to a big PR and checking whether your CI runs through, it can be more energy efficient to separate out a smaller PR with just those changes. This will then (hopefully) trigger a smaller set of tests being rerun instead of all those that were affected in the big PR. 
+If you have set up [triggers](#triggers) properly, you should look at the way
+you are debugging/changing PRs. Rather than making small changes to a big PR and
+checking whether your CI runs through, it can be more energy efficient to
+separate out a smaller PR with just those changes. This will then (hopefully)
+trigger a smaller set of tests being rerun instead of all those that were
+affected in the big PR. 
