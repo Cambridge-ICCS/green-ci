@@ -21,7 +21,18 @@ reliable CI processes.
 
 ### Concurrency
 
-*Work in progress* (https://github.com/Cambridge-ICCS/green-ci/issues/3)
+Suppose you or one of your collaborators has triggered a GitHub Actions
+workflow and it has jobs that are still running. If someone triggers the same
+workflow again (e.g., by pushing a commit) then it usually doesn't make sense
+for the original workflow to continue running, given that the subsequent one
+corresponds to the more recent version of the branch. In such cases, it can make
+sense to configure the `concurrency` so that in-progress jobs will be cancelled.
+This can be achieved with the following syntax:
+```yml
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+```
 
 ### Triggers and separation of concerns
 
