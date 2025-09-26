@@ -25,7 +25,29 @@ reliable CI processes.
 
 ### Triggers and separation of concerns
 
-*Work in progress* (https://github.com/Cambridge-ICCS/green-ci/issues/4)
+Suppose you want to make a small change such as fixing typos or updating
+Markdown files. In a naive CI setup, this will trigger the full suite, involving
+tasks such as running tests, building documentation, and running static analysis
+tools. This can be extremely wasteful, especially for large repositories with
+long-running test suites. One way to avoid this is to make use of *triggers*.
+You might be familiar with triggers related to pushing to particular branches,
+pushes to open PRs, and manual triggering from the
+[Actions](https://github.com/Cambridge-ICCS/green-ci/actions) tab, as
+demonstrated below:
+```yml
+name: MyTestSuite
+
+on:
+  # Triggers the workflow on pushes to the "main" branch, i.e., PR merges
+  push:
+    branches: [ "main" ]
+
+  # Triggers the workflow on pushes to open pull requests
+  pull_request:
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+```
 
 ### Test PRs
 
