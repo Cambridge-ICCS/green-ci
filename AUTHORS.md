@@ -4,7 +4,7 @@ Convening.
 
 Authors listed alphabetically by surname:
 * [Don Setiawan](@lsetiawan),
-  [Scientific Software Engineering Center](https://escience.washington.edu/software-engineering/ssec/),
+  [UW Scientific Software Engineering Center](https://escience.washington.edu/software-engineering/ssec/),
   University of Washington, USA.
 * [Joe Wallwork](@jwallwork23),
   [Institute of Computing for Climate Science](https://iccs.cam.ac.uk/),
