@@ -17,7 +17,22 @@ reliable CI processes.
 
 ### Time limits
 
-*Work in progress* (https://github.com/Cambridge-ICCS/green-ci/issues/2)
+By default, a job will continue running for 360 minutes (6 hours) before being
+cancelled. This can be extremely wasteful in cases where the code has stalled,
+for example. As such, it is good practice to provide a shorter time limit after
+which the job will be cancelled. This should be an over-estimate, so that the
+job will still pass when the code is working as expected.
+
+Some example GitHub Actions workflow syntax for implementing a 10 minute time
+limit on a job called `test-ubuntu-serial` with the `ubuntu-latest` runner is as
+follows:
+```yml
+jobs:
+  test-ubuntu-serial:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    # <Further job definition>
+```
 
 ### Concurrency
 
