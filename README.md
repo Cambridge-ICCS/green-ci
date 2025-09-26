@@ -87,6 +87,3 @@ If your code fails during a CI run, it sometimes can be hard to find the issue w
 If the issue is not in the test suit which can be easily rerun (for example, using [pytest](https://docs.pytest.org/), a tool like [act](https://github.com/nektos/act) can be used to run your CI pipeline locally in a container.
 
 Alternatively, you can interact with your Github actions using [action-tmate](https://github.com/mxschmitt/action-tmate) (with tmate being a fork of [tmux](https://github.com/tmux/tmux/wiki)). This enables you to use ssh to connect with the machine that the actions are run on.
-
-
-*Work in progress (https://github.com/Cambridge-ICCS/green-ci/issues/16)*
