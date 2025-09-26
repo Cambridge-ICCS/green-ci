@@ -26,6 +26,14 @@ that can help you make your software development practices greener.
 
 ## Best practices
 
+Contents
+* [Time limits](#time-limits)
+* [Concurrency](#concurrency)
+* [Triggers][#triggers]
+* [Separation of concerns](#separation-of-concerns)
+* [Skip CI](#skip-ci)
+* [Test PRs](#test-prs)
+
 ### Time limits
 
 By default, a job will continue running for 360 minutes (6 hours) before being
@@ -138,6 +146,15 @@ on:
 for source code with extension `.c`, header files with extension `.h`, and CMake
 build files.
 
+> [!WARNING]
+> Often administrators configure repository settings such that certain (or all)
+> workflows are required to pass (on the latest commit) before a PR is merged.
+> In this case, untriggered workflows can become problematic. One way to get
+> around this issue is to include `pull_request_review` triggers to any
+> workflows that need to be run before merging so that they are triggered
+> whenever a review is received. A downside of this workaround is that it can
+> itself lead to unnecessary workflow runs.
+
 ### Separation of concerns
 
 The information on [triggers](#triggers) above is useful but what if you have
@@ -189,6 +206,23 @@ change.
 > different types of files in the same change. For example, it is good practice
 > to update documentation in line with changes to source code.
 
+### Skip CI
+
+GitHub Actions supports manually skipping of CI workflows that would be
+triggered by `push` or `pull_request` by including any of the following strings
+in a commit message:
+* `[skip ci]`
+* `[ci skip]`
+* `[no ci]`
+* `[skip actions]`
+* `[actions skip]`
+The same warning applies as mentioned in the [Triggers](#triggers) section. As
+such, you should not use this notation in the final commit included in a PR
+before requesting reviews.
+
+See the
+[GitHub documentation page](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/skip-workflow-runs)
+for more details.
 
 ## Debugging
 
