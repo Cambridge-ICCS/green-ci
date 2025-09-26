@@ -35,7 +35,15 @@ You will need to `pip install copier`, then you can create a new module via:
 copier copy https://github.com/Cambridge-ICCS/green-ci.git /path/to/my-project
 ```
 
+<<<<<<< Updated upstream
 You can also use it via `uvx copier` if you have [`uv`](https://docs.astral.sh/uv/) installed.
+=======
+*Note that you will be prompted to enter some information,
+such as the triggers for the workflow, the timeout limits, and whether
+this workflow should be carbon aware (extra monitoring for energy usage).*
+
+You can also use it via `uvx copier` if you have `uv` installed.
+>>>>>>> Stashed changes
 
 ## Best practices
 
