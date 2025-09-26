@@ -40,11 +40,26 @@ jobs:
         continue-on-error: true
 
       # TODO: Add your other steps here
+    
+      # NOTE: To measure energy consumption of specific steps in your workflow,
+      # For each step you want to measure, add a measurement step after it with a unique label
+      # this will allow the eco-ci tool to collect energy consumption data. Example below.
+      # See https://github.com/green-coding-solutions/eco-ci-energy-estimation?tab=readme-ov-file#github-action-mandatory-and-optional-variables
+      #   - name: Tests measurement
+      #     uses: green-coding-solutions/eco-ci-energy-estimation@v4 # use hash or @vX here (See note below)
+      #     with:
+      #       task: get-measurement
+      #       label: 'pytest'
+      #     continue-on-error: true
 
       - name: Show Energy Results
         uses: green-coding-solutions/eco-ci-energy-estimation@v4 # use hash or @vX here (See note below)
         with:
           task: display-results
         continue-on-error: true
+      {% endraw %}
+      {% else %}
+      {% raw %}
+      # TODO: Add your other steps here
       {% endraw %}
       {%- endif -%}
