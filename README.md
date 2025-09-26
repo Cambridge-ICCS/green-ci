@@ -23,7 +23,7 @@ reliable CI processes.
 
 *Work in progress* (https://github.com/Cambridge-ICCS/green-ci/issues/3)
 
-### Triggers and separation of concerns
+### Triggers
 
 Suppose you want to make a small change such as fixing typos or updating
 Markdown files. In a naive CI setup, this will trigger the full suite, involving
@@ -60,7 +60,7 @@ trigger the test suite when they are run. For example, in Python we could use:
 name: MyPythonTestSuite
 
 on:
-  # Triggers the workflow on pushes to open pull requests
+  # Triggers the workflow on pushes to open pull requests with code changes
   pull_request:
     paths:
       - '.github/workflows/test_suite_python.yml'
@@ -77,7 +77,7 @@ files related to the build system. For example:
 name: MyCTestSuite
 
 on:
-  # Triggers the workflow on pushes to open pull requests
+  # Triggers the workflow on pushes to open pull requests with code changes
   pull_request:
     paths:
       - '.github/workflows/test_suite_c.yml'
@@ -87,6 +87,56 @@ on:
 ```
 for source code with extension `.c`, header files with extension `.h`, and CMake
 build files.
+
+### Separation of concerns
+
+The information on [triggers](#triggers) above is useful but what if you have
+workflows for other tasks than just tests, such as static analysis and
+documentation builds? In such cases, it's good practice to implement separate
+workflows with appropriate triggers.
+
+In the example case of a Python code that uses the
+[ruff](https://docs.astral.sh/ruff/) static analysis tool for linting and
+formatting, the triggers could take the form:
+```yml
+name: MyPythonStaticAnalysisWorkflow
+
+on:
+  # Triggers the workflow on pushes to open pull requests with code changes
+  pull_request:
+    paths:
+      - '.github/workflows/static_analysis_python.yml'
+      - '**.py'
+```
+where `static_analysis_python.yml` is the filename of the workflow. Here, the
+workflow will only be triggered when commits are pushed that include changes to
+the workflow configuration or Python source code.
+
+In the example case where Fortran documentation is built using
+[FORD](https://github.com/Fortran-FOSS-Programmers/ford), the triggers could
+take the form:
+```yml
+name: BuildDocs
+
+on:
+  # Triggers the workflow on pushes to open pull requests to main with documentation changes
+  pull_request:
+    paths:
+      - '.github/workflows/build_docs_ford.yml'
+      - '**.md'
+      - 'pages/*'
+```
+
+The above can be extended to separate out CPU vs. GPU test suites, test suites
+on different operating systems (e.g., Ubuntu, Mac, Windows), and
+[JOSS](https://joss.theoj.org/) paper rendering, for example. Having separated
+concerns in this way, the overall number of jobs can be reduced, provided the
+contributor doesn't modify several different parts of the repository in the same
+change.
+
+> [!NOTE] In some cases it can be a good thing for contributors to edit multiple
+>         different types of files in the same change. For example, it is good
+>         practice to update documentation in line with changes to source code.
 
 ### Test PRs
 
