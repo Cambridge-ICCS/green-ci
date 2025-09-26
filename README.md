@@ -11,7 +11,7 @@ reliable CI processes.
 
 ## Existing Literature
 
-There are a couple of studies on this topic, for example [Carbon Awareness in CI/CD by Classen et all](https://arxiv.org/abs/2310.18718)
+There are a couple of studies on this topic, for example [Carbon Awareness in CI/CD by Classen et al](https://arxiv.org/abs/2310.18718)
 and [Carbon-Aware Continuous Integration: Reducing Emissions Without Sacrificing Performance by Laskar](https://lorojournals.com/index.php/emsj/article/view/1581).
 These mostly rely on scheduling workloads for low-carbon times or shifting to low-carbon locations, as well as reducing overhead in the workloads (e.g., through
 minimisation of unnecessary runs and builds).
