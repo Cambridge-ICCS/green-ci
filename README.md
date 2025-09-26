@@ -134,9 +134,10 @@ concerns in this way, the overall number of jobs can be reduced, provided the
 contributor doesn't modify several different parts of the repository in the same
 change.
 
-> [!NOTE] In some cases it can be a good thing for contributors to edit multiple
->         different types of files in the same change. For example, it is good
->         practice to update documentation in line with changes to source code.
+> [!NOTE]
+> In some cases it can be a good thing for contributors to edit multiple
+> different types of files in the same change. For example, it is good practice
+> to update documentation in line with changes to source code.
 
 ### Test PRs
 
