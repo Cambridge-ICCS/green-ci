@@ -15,7 +15,7 @@ build_docs_timeout:
 
 carbon_aware:
   type: bool
-  default: false
+  default: true
   help: Whether to include carbon-aware energy measurement steps in the workflow
 
 _subdirectory: "template"
