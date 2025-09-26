@@ -34,6 +34,19 @@ jobs:
     # <Further job definition>
 ```
 
+In most cases, your job will hopefully complete and pass within the allotted
+time limit. However, there may be cases where this doesn't happen. This could
+happen due to:
+1. There is an intermittent or random issue (e.g., connection issue to an web
+   resource, hardware malfunction, cosmic ray). In such cases, it may be
+   sufficient to retry the workflow manually by clicking the red cross
+   indicating the workflow failure, selecting the offending job, and clicking
+   the 'Re-run jobs' button near the top of the page.
+2. The job has stalled due to an issue on your branch. Addressing this will
+   require [debugging](#debugging) your change.
+3. You made a change that just causes your tests or docs build to require longer
+   to run. In this case, you'll need to increase the time limit.
+
 ### Concurrency
 
 *Work in progress* (https://github.com/Cambridge-ICCS/green-ci/issues/3)
@@ -45,3 +58,7 @@ jobs:
 ### Test PRs
 
 *Work in progress* (https://github.com/Cambridge-ICCS/green-ci/issues/5)
+
+## Debugging
+
+*Work in progress (https://github.com/Cambridge-ICCS/green-ci/issues/16)*
