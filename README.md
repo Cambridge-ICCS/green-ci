@@ -29,7 +29,7 @@ that can help you make your software development practices greener.
 Contents
 * [Time limits](#time-limits)
 * [Concurrency](#concurrency)
-* [Triggers][#triggers]
+* [Triggers](#triggers)
 * [Separation of concerns](#separation-of-concerns)
 * [Skip CI](#skip-ci)
 * [Test PRs](#test-prs)
@@ -234,5 +234,3 @@ Alternatively, you can interact with your GitHub actions using [action-tmate](ht
 ### Test PRs
 
 If you have set up [triggers](#triggers) properly, you should look at the way you are debugging/changing PRs. Rather than making small changes to a big PR and checking whether your CI runs through, it can be more energy efficient to separate out a smaller PR with just those changes. This will then (hopefully) trigger a smaller set of tests being rerun instead of all those that were affected in the big PR. 
-
-
