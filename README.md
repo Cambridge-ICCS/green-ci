@@ -71,7 +71,7 @@ where `test_suite_python.yml` is the name of the workflow file itself. Here the
 workflow will only be run if the file itself, any Python source files, or the
 repository's `requirements.txt` dependencies file change.
 
-For compiled languages such as C, it would likely also be a good idea to include
+For compiled languages such as C, it often also is a good idea to include
 files related to the build system. For example:
 ```yml
 name: MyCTestSuite
