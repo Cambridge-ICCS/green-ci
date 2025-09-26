@@ -1,0 +1,21 @@
+build_docs_triggers:
+  type: yaml
+  default: ['.github/workflows/build_docs.yml']
+  multiline: true
+  help: |
+    A YAML list of file patterns that will trigger the documentation build when changed in a pull request to the main branch.
+    Example: 
+      - '**/*.yaml'
+      - '**/*.md'
+
+build_docs_timeout:
+  type: int
+  default: 15
+  help: The timeout in minutes for the documentation build job
+
+carbon_aware:
+  type: bool
+  default: false
+  help: Whether to include carbon-aware energy measurement steps in the workflow
+
+_subdirectory: "template"

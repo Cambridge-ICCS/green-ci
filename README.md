@@ -22,7 +22,20 @@ that can help you make your software development practices greener.
 
 ## Usage
 
-*Work in progress*
+This repository provides templates for GitHub Actions workflows that can be
+used as a starting point for implementing green software engineering practices in CI pipelines.
+To use the templates, use `copier` with instructions below.
+You can then modify the workflow files to suit your specific needs,
+such as changing the triggers, adding or removing jobs, and adjusting the time
+limits.
+
+You will need to `pip install copier`, then you can create a new module via:
+
+```bash
+copier copy https://github.com/Cambridge-ICCS/green-ci.git /path/to/my-project
+```
+
+You can also use it via `uvx copier` if you have `uv` installed.
 
 ## Best practices
 
