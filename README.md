@@ -1,4 +1,4 @@
-# Green Software Engineering Practices for GitHub Actions Continuous Integration (CI) workflows
+# Green Continuous Integration (CI) workflows
 
 In this repository, we encourage the use of green software engineering practices
 in continuous integration (CI) workflows implemented with GitHub Actions. It
