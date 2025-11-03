@@ -26,6 +26,11 @@ build_docs_timeout:
   default: 15
   help: The timeout in minutes for the documentation build job
 
+static_analysis_timeout:
+  type: int
+  default: 10
+  help: The timeout in minutes for the static analysis job
+
 carbon_aware:
   type: bool
   default: true

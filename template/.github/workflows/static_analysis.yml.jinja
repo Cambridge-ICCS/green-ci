@@ -26,10 +26,11 @@ concurrency:
 jobs:
   # Run static analysis tools
   static-analysis:
-    # The timeout minutes for the job to complete
-    timeout-minutes: {{ build_docs_timeout }}
+    name: static analysis
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    # The timeout minutes for the job to complete
+    timeout-minutes: {{ static_analysis_timeout }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
