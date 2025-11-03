@@ -70,10 +70,9 @@ jobs:
       - name: Run static analysis tools
         run: echo "TODO replace this echo call with your static analysis tool commands"
       {% endraw %}
-      {%- endif -%}
+      {% endif %}
 
   # Apply GitHub Actions linter, zizmor
-  # TODO Fix incorrect indentation
   zizmor:
     name: zizmor
     runs-on: ubuntu-latest
