@@ -22,6 +22,9 @@ concurrency:
   group: {% raw %}${{ github.workflow }}-${{ github.ref }}{% endraw %}
   cancel-in-progress: true
 
+# Write permissions are not needed for this workflow
+permissions: {}
+
 # Workflow run - one or more jobs that can run sequentially or in parallel
 jobs:
   # Run static analysis tools
@@ -37,42 +40,45 @@ jobs:
       {%- if carbon_aware -%}
       {% raw %}
       - name: Start Measurement
-        uses: green-coding-solutions/eco-ci-energy-estimation@v4 # use hash or @vX here (See note below)
+        uses: green-coding-solutions/eco-ci-energy-estimation@862050e4f01f65b1436e5eca18ba4bd85562f0de # v5.0.0
         with:
           task: start-measurement
         continue-on-error: true
 
-      # TODO: Add your other steps here
-    
+      - name: Run static analysis tools
+        run: echo "TODO replace this echo call with your static analysis tool commands"
+
       # NOTE: To measure energy consumption of specific steps in your workflow,
       # For each step you want to measure, add a measurement step after it with a unique label
       # this will allow the eco-ci tool to collect energy consumption data. Example below.
       # See https://github.com/green-coding-solutions/eco-ci-energy-estimation?tab=readme-ov-file#github-action-mandatory-and-optional-variables
       #   - name: Tests measurement
-      #     uses: green-coding-solutions/eco-ci-energy-estimation@v4 # use hash or @vX here (See note below)
+      #     uses: green-coding-solutions/eco-ci-energy-estimation@862050e4f01f65b1436e5eca18ba4bd85562f0de # v5.0.0
       #     with:
       #       task: get-measurement
       #       label: 'pytest'
       #     continue-on-error: true
 
       - name: Show Energy Results
-        uses: green-coding-solutions/eco-ci-energy-estimation@v4 # use hash or @vX here (See note below)
+        uses: green-coding-solutions/eco-ci-energy-estimation@862050e4f01f65b1436e5eca18ba4bd85562f0de # v5.0.0
         with:
           task: display-results
         continue-on-error: true
       {% endraw %}
       {% else %}
       {% raw %}
-      # TODO: Add your other steps here
+      - name: Run static analysis tools
+        run: echo "TODO replace this echo call with your static analysis tool commands"
       {% endraw %}
       {%- endif -%}
 
   # Apply GitHub Actions linter, zizmor
+  # TODO Fix incorrect indentation
   zizmor:
     name: zizmor
     runs-on: ubuntu-latest
     permissions:
-      security-events: write
+      security-events: write # Trusted with write permissions
     steps:
       - name: Checkout repository
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0

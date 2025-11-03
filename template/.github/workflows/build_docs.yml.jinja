@@ -22,46 +22,53 @@ concurrency:
   group: {% raw %}${{ github.workflow }}-${{ github.ref }}{% endraw %}
   cancel-in-progress: true
 
+# Write permissions are not needed for all jobs in this workflow
+# TODO Separate test and deploy jobs
+permissions: {}
+
 # Workflow run - one or more jobs that can run sequentially or in parallel
 jobs:
   # Build the project documentation
   build-docs:
-    # The timeout minutes for the job to complete
-    timeout-minutes: {{ build_docs_timeout }}
+    name: build docs
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    # The timeout minutes for the job to complete
+    timeout-minutes: {{ build_docs_timeout }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       {%- if carbon_aware -%}
       {% raw %}
       - name: Start Measurement
-        uses: green-coding-solutions/eco-ci-energy-estimation@v4 # use hash or @vX here (See note below)
+        uses: green-coding-solutions/eco-ci-energy-estimation@862050e4f01f65b1436e5eca18ba4bd85562f0de # v5.0.0
         with:
           task: start-measurement
         continue-on-error: true
 
-      # TODO: Add your other steps here
-    
+      - name: Build documentation
+        run: echo "TODO replace this echo call with your docs build commands"
+
       # NOTE: To measure energy consumption of specific steps in your workflow,
       # For each step you want to measure, add a measurement step after it with a unique label
       # this will allow the eco-ci tool to collect energy consumption data. Example below.
       # See https://github.com/green-coding-solutions/eco-ci-energy-estimation?tab=readme-ov-file#github-action-mandatory-and-optional-variables
       #   - name: Tests measurement
-      #     uses: green-coding-solutions/eco-ci-energy-estimation@v4 # use hash or @vX here (See note below)
+      #     uses: green-coding-solutions/eco-ci-energy-estimation@862050e4f01f65b1436e5eca18ba4bd85562f0de # v5.0.0
       #     with:
       #       task: get-measurement
       #       label: 'pytest'
       #     continue-on-error: true
 
       - name: Show Energy Results
-        uses: green-coding-solutions/eco-ci-energy-estimation@v4 # use hash or @vX here (See note below)
+        uses: green-coding-solutions/eco-ci-energy-estimation@862050e4f01f65b1436e5eca18ba4bd85562f0de # v5.0.0
         with:
           task: display-results
         continue-on-error: true
       {% endraw %}
       {% else %}
       {% raw %}
-      # TODO: Add your other steps here
+      - name: Build documentation
+        run: echo "TODO replace this echo call with your docs build commands"
       {% endraw %}
       {%- endif -%}
