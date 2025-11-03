@@ -4,8 +4,7 @@ build_docs_triggers:
   multiline: true
   help: |
     A YAML list of file patterns that will trigger the documentation build when changed in a pull request to the main branch.
-    Example: 
-      - '**/*.yaml'
+    Example:
       - '**/*.md'
 
 static_analysis_triggers:
@@ -14,8 +13,7 @@ static_analysis_triggers:
   multiline: true
   help: |
     A YAML list of file patterns that will trigger the static analysis workflow when changed in a pull request to the main branch.
-    Python example: 
-      - '.github/workflows/*.yml'
+    Python example:
       - '**/*.py'
       - 'requirements.txt'
     C++ example:

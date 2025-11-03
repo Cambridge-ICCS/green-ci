@@ -10,8 +10,10 @@ on:
   # Triggers the workflow on pushes to open pull requests to main with documentation changes
   pull_request:
     branches: [ "main" ]
-    paths: {{ build_docs_triggers }}
-
+    paths:
+      - '.github/workflows/build_docs.yml'
+      {% for trigger in build_docs_triggers %}- '{{ trigger | safe }}'
+      {% endfor %}
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
