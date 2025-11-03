@@ -18,6 +18,10 @@ static_analysis_triggers:
       - '.github/workflows/*.yml'
       - '**/*.py'
       - 'requirements.txt'
+    C++ example:
+      - '**/*.cpp'
+      - '**/*.hpp'
+      - '**/CMakeLists.txt'
 
 build_docs_timeout:
   type: int
