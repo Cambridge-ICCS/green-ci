@@ -1,5 +1,5 @@
 # Workflow to build and deploy docs for the project
-name: BuildDocs
+name: Build docs
 
 # Controls when the workflow will run
 on:
@@ -22,7 +22,7 @@ concurrency:
 
 # Workflow run - one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build-docs"
+  # Build the project documentation
   build-docs:
     # The timeout minutes for the job to complete
     timeout-minutes: {{ build_docs_timeout }}
