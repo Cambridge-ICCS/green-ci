@@ -8,6 +8,17 @@ build_docs_triggers:
       - '**/*.yaml'
       - '**/*.md'
 
+static_analysis_triggers:
+  type: yaml
+  default: ['.github/workflows/static_analysis.yml']
+  multiline: true
+  help: |
+    A YAML list of file patterns that will trigger the static analysis workflow when changed in a pull request to the main branch.
+    Python example: 
+      - '.github/workflows/*.yml'
+      - '**/*.py'
+      - 'requirements.txt'
+
 build_docs_timeout:
   type: int
   default: 15
