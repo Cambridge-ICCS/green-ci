@@ -12,7 +12,7 @@ on:
     branches: [ "main" ]
     paths:
       - '.github/workflows/build_docs.yml'
-      {% for trigger in build_docs_triggers %}- '{{ trigger | safe }}'
+      {% for trigger in docs_file_paths %}- '{{ trigger | safe }}'
       {% endfor %}
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
