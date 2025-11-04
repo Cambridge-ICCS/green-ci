@@ -45,7 +45,7 @@ jobs:
       - name: Jinja linting with djlint
         run: |
           pip install -r requirements-dev.txt
-          djlint template/.github/workflows/*.yml
+          djlint template/.github/workflows/*.yml.jinja
 
   # Apply GitHub Actions linter, zizmor
   zizmor:
