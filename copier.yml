@@ -33,6 +33,7 @@ requirements_file_paths:
     A YAML list of requirements file patterns including the file extension.
     Example:
       - 'requirements.txt'
+      - 'requirements-dev.txt'
 
 build_docs_timeout:
   type: int

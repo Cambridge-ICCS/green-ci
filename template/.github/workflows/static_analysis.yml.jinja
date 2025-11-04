@@ -12,6 +12,7 @@ on:
     branches: [ "main" ]
     paths:
       - '.github/workflows/*.yml'{% for trigger in source_file_paths %}
+      - '{{ trigger | safe }}'{% endfor %}{% for trigger in requirements_file_paths %}
       - '{{ trigger | safe }}'{% endfor %}
 
   # Allows you to run this workflow manually from the Actions tab

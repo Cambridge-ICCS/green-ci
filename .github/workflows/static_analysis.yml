@@ -13,7 +13,6 @@ on:
     paths:
       - '.github/workflows/*.yml'
       - '**/*.jinja'
-      - 'requirements.txt'
       - 'requirements-dev.txt'
 
   # Allows you to run this workflow manually from the Actions tab
@@ -41,7 +40,7 @@ jobs:
     steps:
       - name: Jinja linting with djlint
         run: |
-          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
           djlint template/.github/workflows/*.yml
 
   # Apply GitHub Actions linter, zizmor
