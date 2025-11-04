@@ -23,7 +23,6 @@ concurrency:
   cancel-in-progress: true
 
 # Write permissions are not needed for all jobs in this workflow
-# TODO Separate test and deploy jobs
 permissions: {}
 
 # Workflow run - one or more jobs that can run sequentially or in parallel
@@ -71,9 +70,8 @@ jobs:
       - name: Build documentation
         run: echo "TODO replace this echo call with your docs build commands"
       {%- endraw -%}
-      {%- endif -%}
-
-  {% if deploy_docs %}
+      {% endif %}
+{% if deploy_docs %}
   # Build the project documentation and deploy it
   build-and-deploy:
     name: build and deploy docs
@@ -116,11 +114,11 @@ jobs:
         with:
           task: display-results
         continue-on-error: true
-      {% endraw %}
-      {% else %}
+      {%- endraw -%}
+      {%- else -%}
       {% raw %}
       - name: Build and deploy documentation
         run: echo "TODO replace this echo call with your docs build and deploy commands"
-      {% endraw %}
+      {%- endraw -%}
       {%- endif -%}
-  {%- endif -%}
+{%- endif -%}
