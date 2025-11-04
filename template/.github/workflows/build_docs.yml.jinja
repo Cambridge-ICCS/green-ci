@@ -73,6 +73,7 @@ jobs:
       {%- endraw -%}
       {%- endif -%}
 
+  {% if deploy_docs %}
   # Build the project documentation and deploy it
   build-and-deploy:
     name: build and deploy docs
@@ -122,3 +123,4 @@ jobs:
         run: echo "TODO replace this echo call with your docs build and deploy commands"
       {% endraw %}
       {%- endif -%}
+  {%- endif -%}

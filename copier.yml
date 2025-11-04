@@ -26,6 +26,11 @@ static_analysis_timeout:
   default: 10
   help: The timeout in minutes for the static analysis job
 
+deploy_docs:
+  type: bool
+  default: true
+  help: Whether to include a deployment job in the docs workflow.
+
 carbon_aware:
   type: bool
   default: true
