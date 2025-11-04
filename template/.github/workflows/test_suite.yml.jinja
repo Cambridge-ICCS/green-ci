@@ -14,6 +14,7 @@ on:
       - '.github/workflows/test_suite.yml'
       {% for trigger in source_file_paths %}- '{{ trigger | safe }}'
       {% endfor %}{% for trigger in build_sys_file_paths %}- '{{ trigger | safe }}'
+      {% endfor %}{% for trigger in requirements_file_paths %}- '{{ trigger | safe }}'
       {% endfor %}
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:

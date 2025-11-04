@@ -25,6 +25,15 @@ build_sys_file_paths:
     Example:
       - '**/Makefile'
 
+requirements_file_paths:
+  type: yaml
+  default: ['requirements.txt']
+  multiline: true
+  help: |
+    A YAML list of requirements file patterns including the file extension.
+    Example:
+      - 'requirements.txt'
+
 build_docs_timeout:
   type: int
   default: 15
