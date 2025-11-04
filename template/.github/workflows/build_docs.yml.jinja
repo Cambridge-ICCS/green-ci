@@ -12,8 +12,8 @@ on:
     branches: [ "main" ]
     paths:
       - '.github/workflows/build_docs.yml'
-      {% for trigger in docs_file_paths %}- '{{ trigger | safe }}'
-      {% endfor %}
+      {% for trigger in docs_file_paths %}- '{{ trigger | safe }}'{% endfor %}
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -65,10 +65,10 @@ jobs:
         with:
           task: display-results
         continue-on-error: true
-      {% endraw %}
-      {% else %}
+      {%- endraw -%}
+      {%- else -%}
       {% raw %}
       - name: Build documentation
         run: echo "TODO replace this echo call with your docs build commands"
-      {% endraw %}
+      {%- endraw -%}
       {%- endif -%}

@@ -12,8 +12,8 @@ on:
     branches: [ "main" ]
     paths:
       - '.github/workflows/*.yml'
-      {% for trigger in source_file_paths %}- '{{ trigger | safe }}'
-      {% endfor %}
+      {% for trigger in source_file_paths %}- '{{ trigger | safe }}'{% endfor %}
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -64,12 +64,12 @@ jobs:
         with:
           task: display-results
         continue-on-error: true
-      {% endraw %}
-      {% else %}
+      {%- endraw -%}
+      {%- else -%}
       {% raw %}
       - name: Run static analysis tools
         run: echo "TODO replace this echo call with your static analysis tool commands"
-      {% endraw %}
+      {%- endraw -%}
       {% endif %}
 
   # Apply GitHub Actions linter, zizmor
