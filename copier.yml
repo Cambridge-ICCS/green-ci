@@ -3,7 +3,7 @@ source_file_paths:
   default: ['**/*.py']
   multiline: true
   help: |
-    A YAML list of source file paths including the file extension.
+    A YAML list of source file patterns including the file extension.
     Example:
       - '**/*.py'
 
@@ -12,7 +12,7 @@ docs_file_paths:
   default: ['**/*.md']
   multiline: true
   help: |
-    A YAML list of documentation file paths including the file extension.
+    A YAML list of documentation file patterns including the file extension.
     Example:
       - '**/*.md'
 
