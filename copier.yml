@@ -16,6 +16,15 @@ docs_file_paths:
     Example:
       - '**/*.md'
 
+build_sys_file_paths:
+  type: yaml
+  default: ['**/Makefile']
+  multiline: true
+  help: |
+    A YAML list of build system file patterns including the file extension.
+    Example:
+      - '**/Makefile'
+
 build_docs_timeout:
   type: int
   default: 15
@@ -25,6 +34,11 @@ static_analysis_timeout:
   type: int
   default: 10
   help: The timeout in minutes for the static analysis job
+
+test_suite_timeout:
+  type: int
+  default: 15
+  help: The timeout in minutes for the test suite job
 
 carbon_aware:
   type: bool
