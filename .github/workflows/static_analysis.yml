@@ -38,6 +38,11 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - name: Checkout code
+        with:
+          persist-credentials: false
+        uses: actions/checkout@v4
+
       - name: Jinja linting with djlint
         run: |
           pip install -r requirements-dev.txt
