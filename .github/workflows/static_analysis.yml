@@ -1,0 +1,60 @@
+# Workflow to perform static analysis on the project
+name: Static analysis
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on pushes to the "main" branch, i.e., PR merges
+  push:
+    branches: [ "main" ]
+
+  # Triggers the workflow on pushes to open pull requests to main with documentation changes
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - '.github/workflows/*.yml'
+      - '**/*.jinja'
+      - 'requirements.txt'
+      - 'requirements-dev.txt'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Helps prevent parallel runs of the workflow from overlapping
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+# Write permissions are not needed for this workflow
+permissions: {}
+
+# Workflow run - one or more jobs that can run sequentially or in parallel
+jobs:
+  # Run static analysis tools
+  static-analysis:
+    name: static analysis
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    # The timeout minutes for the job to complete
+    timeout-minutes: 5
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: Jinja linting with djlint
+        run: |
+          pip install -r requirements.txt
+          djlint template/.github/workflows/*.yml
+
+  # Apply GitHub Actions linter, zizmor
+  zizmor:
+    name: zizmor
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write # Trusted with write permissions
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: false
+
+      - name: Run zizmor
+        uses: zizmorcore/zizmor-action@e673c3917a1aef3c65c972347ed84ccd013ecda4 # v0.2.0
