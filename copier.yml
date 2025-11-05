@@ -1,17 +1,30 @@
-build_docs_triggers:
+source_file_paths:
   type: yaml
-  default: ['.github/workflows/build_docs.yml']
+  default: ['**/*.py']
   multiline: true
   help: |
-    A YAML list of file patterns that will trigger the documentation build when changed in a pull request to the main branch.
-    Example: 
-      - '**/*.yaml'
+    A YAML list of source file patterns including the file extension.
+    Example:
+      - '**/*.py'
+
+docs_file_paths:
+  type: yaml
+  default: ['**/*.md']
+  multiline: true
+  help: |
+    A YAML list of documentation file patterns including the file extension.
+    Example:
       - '**/*.md'
 
 build_docs_timeout:
   type: int
   default: 15
   help: The timeout in minutes for the documentation build job
+
+static_analysis_timeout:
+  type: int
+  default: 10
+  help: The timeout in minutes for the static analysis job
 
 carbon_aware:
   type: bool
