@@ -1,5 +1,5 @@
-# Workflow to perform static analysis on the project
-name: Static analysis
+# Workflow to run the test suite for the project
+name: Test suite
 
 # Controls when the workflow will run
 on:
@@ -11,7 +11,9 @@ on:
   pull_request:
     branches: [ "main" ]
     paths:
-      - '.github/workflows/*.yml'{% for trigger in source_file_paths %}
+      - '.github/workflows/test_suite.yml'{% for trigger in source_file_paths %}
+      - '{{ trigger | safe }}'{% endfor %}{% for trigger in build_sys_file_paths %}
+      - '{{ trigger | safe }}'{% endfor %}{% for trigger in requirements_file_paths %}
       - '{{ trigger | safe }}'{% endfor %}
 
   # Allows you to run this workflow manually from the Actions tab
@@ -22,18 +24,18 @@ concurrency:
   group: {% raw %}${{ github.workflow }}-${{ github.ref }}{% endraw %}
   cancel-in-progress: true
 
-# Write permissions are not needed for this workflow
+# Write permissions are not needed for all jobs in this workflow
 permissions: {}
 
 # Workflow run - one or more jobs that can run sequentially or in parallel
 jobs:
-  # Run static analysis tools
-  static-analysis:
-    name: static analysis
+  # Run the project test suite
+  test-suite:
+    name: test suite
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     # The timeout minutes for the job to complete
-    timeout-minutes: {{ static_analysis_timeout }}
+    timeout-minutes: {{ test_suite_timeout }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -45,8 +47,8 @@ jobs:
           task: start-measurement
         continue-on-error: true
 
-      - name: Run static analysis tools
-        run: echo "TODO replace this echo call with your static analysis tool commands"
+      - name: Test suite
+        run: echo "TODO replace this echo call with your test suite commands"
 
       # NOTE: To measure energy consumption of specific steps in your workflow,
       # For each step you want to measure, add a measurement step after it with a unique label
@@ -67,22 +69,7 @@ jobs:
       {%- endraw -%}
       {%- else -%}
       {% raw %}
-      - name: Run static analysis tools
-        run: echo "TODO replace this echo call with your static analysis tool commands"
+      - name: Test suite
+        run: echo "TODO replace this echo call with your test suite commands"
       {%- endraw -%}
-      {% endif %}
-
-  # Apply GitHub Actions linter, zizmor
-  zizmor:
-    name: zizmor
-    runs-on: ubuntu-latest
-    permissions:
-      security-events: write # Trusted with write permissions
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-        with:
-          persist-credentials: false
-
-      - name: Run zizmor
-        uses: zizmorcore/zizmor-action@e673c3917a1aef3c65c972347ed84ccd013ecda4 # v0.2.0
+      {%- endif -%}

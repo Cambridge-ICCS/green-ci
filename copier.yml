@@ -16,6 +16,24 @@ docs_file_paths:
     Example:
       - '**/*.md'
 
+build_sys_file_paths:
+  type: yaml
+  default: ['**/Makefile']
+  multiline: true
+  help: |
+    A YAML list of build system file patterns including the file extension.
+    Example:
+      - '**/Makefile'
+
+requirements_file_paths:
+  type: yaml
+  default: ['requirements.txt']
+  multiline: true
+  help: |
+    A YAML list of requirements file patterns including the file extension.
+    Example:
+      - 'requirements.txt'
+
 build_docs_timeout:
   type: int
   default: 15
@@ -26,6 +44,11 @@ static_analysis_timeout:
   default: 10
   help: The timeout in minutes for the static analysis job
 
+test_suite_timeout:
+  type: int
+  default: 15
+  help: The timeout in minutes for the test suite job
+  
 joss_render_timeout:
   type: int
   default: 5
@@ -35,6 +58,11 @@ joss_upload_timeout:
   type: int
   default: 5
   help: The timeout in minutes for the JOSS paper upload job
+
+deploy_docs:
+  type: bool
+  default: true
+  help: Whether to include a deployment job in the docs workflow.
 
 carbon_aware:
   type: bool
