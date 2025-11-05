@@ -49,6 +49,11 @@ test_suite_timeout:
   default: 15
   help: The timeout in minutes for the test suite job
 
+deploy_docs:
+  type: bool
+  default: true
+  help: Whether to include a deployment job in the docs workflow.
+
 carbon_aware:
   type: bool
   default: true
