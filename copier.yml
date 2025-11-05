@@ -48,6 +48,16 @@ test_suite_timeout:
   type: int
   default: 15
   help: The timeout in minutes for the test suite job
+  
+joss_render_timeout:
+  type: int
+  default: 5
+  help: The timeout in minutes for the JOSS paper render job
+
+joss_upload_timeout:
+  type: int
+  default: 5
+  help: The timeout in minutes for the JOSS paper upload job
 
 deploy_docs:
   type: bool
