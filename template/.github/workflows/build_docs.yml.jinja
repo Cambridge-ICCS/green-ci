@@ -6,6 +6,9 @@ on:
   # Triggers the workflow on pushes to the "main" branch, i.e., PR merges
   push:
     branches: [ "main" ]
+    paths:
+      - '.github/workflows/build_docs.yml'{% for trigger in docs_file_paths %}
+      - '{{ trigger | safe }}'{% endfor %}
 
   # Triggers the workflow on pushes to open pull requests to main with documentation changes
   pull_request:
