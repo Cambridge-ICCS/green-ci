@@ -9,7 +9,6 @@ on:
 
   # Triggers the workflow on pushes to open pull requests to main with documentation changes
   pull_request:
-    branches: [ "main" ]
     paths:
       - '.github/workflows/build_docs.yml'{% for trigger in docs_file_paths %}
       - '{{ trigger | safe }}'{% endfor %}
@@ -37,6 +36,12 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      # Checkout your repository under $GITHUB_WORKSPACE so your job can access it
+      - name: Checkout code
+        with:
+          persist-credentials: false
+        uses: actions/checkout@v4
+
       {%- if carbon_aware -%}
       {% raw %}
       - name: Start Measurement
@@ -87,6 +92,12 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      # Checkout your repository under $GITHUB_WORKSPACE so your job can access it
+      - name: Checkout code
+        with:
+          persist-credentials: false
+        uses: actions/checkout@v4
+
       {%- if carbon_aware -%}
       {% raw %}
       - name: Start Measurement
