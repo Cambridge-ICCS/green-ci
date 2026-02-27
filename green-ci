@@ -1,0 +1,63 @@
+#!/bin/bash
+
+set -e # Exit immediately if a command exits with a non-zero status
+
+# Function to display help text
+show_help() {
+  echo -e "\e[32m  _____                        _____ _____ \e[0m"
+  echo -e "\e[32m / ____|                      / ____|_   _|\e[0m"
+  echo -e "\e[32m| |  __ _ __ ___  ___ _ __   | |      | |  \e[0m"
+  echo -e "\e[32m| | |_ | '__/ _ \/ _ \ '_ \  | |      | |  \e[0m"
+  echo -e "\e[32m| |__| | | |  __/  __/ | | | | |____ _| |_ \e[0m"
+  echo -e "\e[32m \_____|_|  \___|\___|_| |_|  \_____|_____|\e[0m"
+  echo ""
+  echo "Usage: $0 prefix [--help | -h]"
+  echo
+  echo "Options:"
+  echo "  prefix            Path to the project where workflows will be set up. (Required)"
+  echo "  --help    | -h    Show this help message and exit."
+}
+
+# Check if a Python virtual environment is active
+if [ -z "${VIRTUAL_ENV}" ]; then
+  echo "No virtual environment is active. Please activate a virtual environment \
+before running this script."
+  exit 1
+fi
+
+# Parse command line arguments
+PREFIX=""
+HELP=false
+for arg in "$@"; do
+  case $arg in
+  --help | -h)
+    HELP=true
+    shift
+    ;;
+  *)
+    if [ -z "${PREFIX}" ]; then
+      PREFIX="$arg"
+    else
+      echo "Unexpected argument: $arg"
+      show_help
+      exit 1
+    fi
+    ;;
+  esac
+done
+
+# Check for --help option
+if [ "${HELP}" = true ]; then
+  show_help
+  exit 0
+fi
+
+# Ensure PREFIX is provided
+if [ -z "${PREFIX}" ]; then
+  echo "Error: 'prefix' is a required argument."
+  show_help
+  exit 1
+fi
+
+# Run copier
+copier copy https://github.com/Cambridge-ICCS/green-ci.git "${PREFIX}"
