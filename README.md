@@ -11,7 +11,7 @@ reliable CI processes.
 
 ## Existing Literature
 
-There are a couple of studies on this topic, for example
+There are a few studies on this topic, for example
 [Carbon Awareness in CI/CD by Classen et al](https://arxiv.org/abs/2310.18718)
 and
 [Carbon-Aware Continuous Integration: Reducing Emissions Without Sacrificing Performance by Laskar](https://lorojournals.com/index.php/emsj/article/view/1581).
@@ -19,7 +19,18 @@ These mostly rely on scheduling workloads for low-carbon times or shifting to
 low-carbon locations, as well as reducing overhead in the workloads (e.g.,
 through minimisation of unnecessary runs and builds).
 
-Tool like [Eco CI](https://github.com/green-coding-solutions/eco-ci-energy-estimation) can help measuring/estimating the energy consumption of CI/CD runs which can help 
+In terms of the GitHub Actions CI/CD framework specifically, the conference
+poster
+[Environmentally-aware use of GitHub Actions by Alvarez](https://doi.org/10.5281/zenodo.12754188)
+proposes good practices and evaluates their impact on workflow time and the
+implied energy usage for an example setup.
+[Environmental impact of CI/CD pipelines by Saavedra et al](https://arxiv.org/abs/2510.26413)
+takes a step back and provides an assessment of the environmental impact of the
+GitHub Actions infrastructure on the whole.
+
+Tools like
+[Eco CI](https://github.com/green-coding-solutions/eco-ci-energy-estimation) can
+help measuring/estimating the energy consumption of CI/CD runs which can help
 making informed decisions about adapting the runs. There are
 [a range of other tools](https://github.blog/open-source/social-impact/the-10-best-tools-to-green-your-software/)
 out there that can help you make your software development practices greener.
