@@ -12,6 +12,7 @@ on:
     paths:
       - '.github/workflows/*.yml'
       - '**/*.jinja'
+      - 'green-ci'
       - 'requirements-dev.txt'
 
   # Allows you to run this workflow manually from the Actions tab
@@ -46,6 +47,12 @@ jobs:
         run: |
           pip install -r requirements-dev.txt
           djlint template/.github/workflows/*.yml.jinja
+
+      - name: Shell linting with Shellcheck
+        run: |
+          sudo apt update
+          sudo apt install shellcheck
+          shellcheck -x green-ci
 
   # Apply GitHub Actions linter, zizmor
   zizmor:
