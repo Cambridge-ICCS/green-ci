@@ -199,10 +199,11 @@ for source code with extension `.c`, header files with extension `.h`, and
 
 ### Separation of concerns
 
-The information on [triggers](#triggers) above is useful but what if you have
-workflows for other tasks than just tests, such as static analysis and
-documentation builds? In such cases, it's good practice to implement separate
-workflows with appropriate triggers.
+The information on [failing fast](#fail-fast) above is useful for workflows
+containing several stages, but further improvements can be made if those stages
+are independent of one another. We can do this by applying a
+separation-of-concerns approach to split the workflow into several workflows and
+accounting for [triggers](#triggers) in each of them.
 
 In the example case of a Python code that uses the
 [ruff](https://docs.astral.sh/ruff/) static analysis tool for linting and
