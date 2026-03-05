@@ -70,4 +70,9 @@ carbon_aware:
   default: true
   help: Whether to include carbon-aware energy measurement steps in the workflow
 
+include_badge:
+  type: bool
+  default: true
+  help: Whether to include a green-ci badge in the README.
+
 _subdirectory: "template"
