@@ -52,6 +52,7 @@ You can also use it via `uvx copier` if you have [`uv`](https://docs.astral.sh/u
 Contents
 * [Time limits](#time-limits)
 * [Concurrency](#concurrency)
+* [Fail-fast](#fail-fast)
 * [Triggers](#triggers)
 * [Separation of concerns](#separation-of-concerns)
 * [Skip CI](#skip-ci)
@@ -106,6 +107,21 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 ```
+
+### Fail-fast
+
+Sometimes workflow jobs contain several steps that are executed in series, for
+example both formatting checks and test suite runs. For such jobs, it is
+important to order the steps such that failure is detected as soon as possible,
+i.e., a *fail-fast* policy. Assuming that formatting checks execute signficantly
+faster than running a test suite, failing fast is achieved by putting the
+formatting check before the test suite run.
+
+A good general ordering is as follows:
+1. Formatting/style/linting checks
+2. Other static analysis checks
+3. Unit test suites
+4. System/integration test suites
 
 ### Triggers
 
