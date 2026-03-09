@@ -11,6 +11,11 @@ reliable CI processes.
 
 ## Existing Literature
 
+> [!NOTE]
+> Green CI/CD is an active area of research and development meaning the list
+> of resources provided in this section is far from complete. It mainly serves
+> to provide pointers to helpful references.
+
 There are a few studies on this topic, for example
 [Carbon Awareness in CI/CD by Classen et al](https://arxiv.org/abs/2310.18718)
 and
