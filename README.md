@@ -294,7 +294,16 @@ If you're interested in getting involved in community activities related to
 green research software engineering (RSE), consider joining the
 [Green RSE Special Interest Group (SIG)](https://socrse.github.io/green-sig/).
 The main aims of the SIG are to:
+
 > - Identify and promote best practices
 > - Collaborate on solutions
 > - Advocate for green policies
 > - Champion the role of RSEs
+
+Other related communities include:
+
+- [The Energy-Efficient High-Performance Computing Working Group](https://eehpcwg.llnl.gov/)
+- TODO: Any more?
+
+If you are involved with another community working on Green practices in
+software engineering, please get in touch!
