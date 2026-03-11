@@ -303,7 +303,8 @@ The main aims of the SIG are to:
 Other related communities include:
 
 - [The Energy-Efficient High-Performance Computing Working Group](https://eehpcwg.llnl.gov/)
-- TODO: Any more?
+- [Community for Environmentally Sustainable Computer Science](https://forum.escs-community.org/)
+- [Green Compute for Research at the University of Manchester](https://research-it.manchester.ac.uk/news/2026/02/03/green-compute-for-research-uom/)
 
-If you are involved with another community working on Green practices in
-software engineering, please get in touch!
+If you are involved with or aware of another community working on Green
+practices in software engineering, please get in touch!
