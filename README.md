@@ -68,6 +68,7 @@ You can also use it via `uvx copier` if you have [`uv`](https://docs.astral.sh/u
 Contents
 * [Time limits](#time-limits)
 * [Concurrency](#concurrency)
+* [Fail-fast](#fail-fast)
 * [Triggers](#triggers)
 * [Separation of concerns](#separation-of-concerns)
 * [Skip CI](#skip-ci)
@@ -122,6 +123,21 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 ```
+
+### Fail-fast
+
+Sometimes workflow jobs contain several steps that are executed in series, for
+example both formatting checks and test suite runs. For such jobs, it is
+important to order the steps such that failure is detected as soon as possible,
+i.e., a *fail-fast* policy. Assuming that formatting checks execute signficantly
+faster than running a test suite, failing fast is achieved by putting the
+formatting check before the test suite run.
+
+A good general ordering is as follows:
+1. Formatting/style/linting checks
+2. Other static analysis checks
+3. Unit test suites
+4. System/integration test suites
 
 ### Triggers
 
@@ -199,10 +215,11 @@ for source code with extension `.c`, header files with extension `.h`, and
 
 ### Separation of concerns
 
-The information on [triggers](#triggers) above is useful but what if you have
-workflows for other tasks than just tests, such as static analysis and
-documentation builds? In such cases, it's good practice to implement separate
-workflows with appropriate triggers.
+The information on [failing fast](#fail-fast) above is useful for workflows
+containing several stages, but further improvements can be made if those stages
+are independent of one another. We can do this by applying a
+separation-of-concerns approach to split the workflow into several workflows and
+accounting for [triggers](#triggers) in each of them.
 
 In the example case of a Python code that uses the
 [ruff](https://docs.astral.sh/ruff/) static analysis tool for linting and
