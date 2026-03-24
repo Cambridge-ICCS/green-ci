@@ -1,0 +1,59 @@
+# Workflow to run the test suite for the project
+name: Test suite
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on pushes to the "main" branch, i.e., PR merges
+  push:
+    branches: [ "main" ]
+    paths:
+      - '.github/workflows/test_suite.yml'
+      - '**/*.jinja'
+      - '**/Makefile'
+      - 'requirements-dev.txt'
+
+  # Triggers the workflow on pushes to open pull requests to main with documentation changes
+  pull_request:
+    paths:
+      - '.github/workflows/test_suite.yml'
+      - '**/*.jinja'
+      - '**/Makefile'
+      - 'requirements-dev.txt'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Helps prevent parallel runs of the workflow from overlapping
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+# Write permissions are not needed for all jobs in this workflow
+permissions: {}
+
+# Workflow run - one or more jobs that can run sequentially or in parallel
+jobs:
+  # Run the project test suite
+  test-suite:
+    name: test suite
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    # The timeout minutes for the job to complete
+    timeout-minutes: 15
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checkout your repository under $GITHUB_WORKSPACE so your job can access it
+      - name: Checkout code
+        with:
+          persist-credentials: false
+        uses: actions/checkout@v4
+
+      - name: Test static analysis template
+        run: |
+          copier copy -a .github/answers/static_analysis.yml -f . .
+          git diff | tail -n +6 > tmp.patch
+          if diff tmp.patch .github/patches/static_analysis.yml; then
+            exit 1
+          fi
+          rm tmp.patch
