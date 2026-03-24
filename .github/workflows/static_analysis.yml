@@ -6,6 +6,10 @@ on:
   # Triggers the workflow on pushes to the "main" branch, i.e., PR merges
   push:
     branches: [ "main" ]
+    paths:
+      - '.github/workflows/*.yml'
+      - '**/*.jinja'
+      - 'requirements-dev.txt'
 
   # Triggers the workflow on pushes to open pull requests to main with documentation changes
   pull_request:
