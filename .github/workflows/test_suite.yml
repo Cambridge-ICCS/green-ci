@@ -52,6 +52,7 @@ jobs:
       - name: Test static analysis template
         run: |
           pip install -r requirements.txt
+          set -e
           copier copy -a .github/answers/static_analysis.yml -f . .
           git diff .github/workflows/static_analysis.yml | tail -n +6 > tmp.patch
           if diff tmp.patch .github/patches/static_analysis.yml; then
@@ -61,6 +62,7 @@ jobs:
 
       - name: Test test suite template
         run: |
+          set -e
           copier copy -a .github/answers/test_suite.yml -f . .
           git diff .github/workflows/test_suite.yml | tail -n +6 > tmp.patch
           if diff tmp.patch .github/patches/test_suite.yml; then

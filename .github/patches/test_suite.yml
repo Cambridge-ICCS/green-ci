@@ -4,6 +4,7 @@
 -
 -      - name: Test static analysis template
 -        run: |
+-          set -e
 -          pip install -r requirements.txt
 -          copier copy -a .github/answers/static_analysis.yml -f . .
 -          git diff .github/workflows/static_analysis.yml | tail -n +6 > tmp.patch
@@ -14,6 +15,7 @@
 -
 -      - name: Test test suite template
 -        run: |
+-          set -e
 -          copier copy -a .github/answers/test_suite.yml -f . .
 -          git diff .github/workflows/test_suite.yml | tail -n +6 > tmp.patch
 -          if diff tmp.patch .github/patches/test_suite.yml; then
