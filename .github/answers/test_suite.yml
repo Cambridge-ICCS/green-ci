@@ -1,4 +1,4 @@
-# Changes here will be overwritten by Copier
+# Answers to be passed to the test suite workflow during testing
 _commit: 44528ab
 _src_path: .
 build_docs_timeout: 15
