@@ -9,7 +9,7 @@ on:
     paths:
       - '.github/workflows/test_suite.yml'
       - '**/*.jinja'
-      - '**/Makefile'
+      - 'copier.yml'
       - 'requirements-dev.txt'
 
   # Triggers the workflow on pushes to open pull requests to main with documentation changes
@@ -17,7 +17,7 @@ on:
     paths:
       - '.github/workflows/test_suite.yml'
       - '**/*.jinja'
-      - '**/Makefile'
+      - 'copier.yml'
       - 'requirements-dev.txt'
 
   # Allows you to run this workflow manually from the Actions tab
