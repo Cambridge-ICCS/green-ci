@@ -51,6 +51,7 @@ jobs:
 
       - name: Test static analysis template
         run: |
+          pip install -r requirements.txt
           copier copy -a .github/answers/static_analysis.yml -f . .
           git diff | tail -n +6 > tmp.patch
           if diff tmp.patch .github/patches/static_analysis.yml; then
