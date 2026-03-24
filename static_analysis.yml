@@ -1,0 +1,18 @@
+# Changes here will be overwritten by Copier
+_commit: 6c998b4
+_src_path: .
+build_docs_timeout: 15
+build_sys_file_paths:
+- '**/Makefile'
+carbon_aware: false
+deploy_docs: false
+docs_file_paths:
+- '**/*.md'
+joss_render_timeout: 5
+joss_upload_timeout: 5
+requirements_file_paths:
+- requirements-dev.txt
+source_file_paths:
+- '**/*.jinja'
+static_analysis_timeout: 5
+test_suite_timeout: 15
