@@ -4,13 +4,14 @@
 -
 -      - name: Test static analysis template
 -        run: |
+-          set +e
 -          pip install -r requirements.txt
 -          copier copy -a .github/answers/static_analysis.yml --force --quiet . .
 -          git diff .github/workflows/static_analysis.yml | tail -n +6 > tmp.patch
 -          if diff tmp.patch .github/patches/static_analysis.patch; then
 -            echo "Mismatch:"
 -            diff tmp.patch .github/patches/static_analysis.patch
--            set +e
+-            set -e
 -            exit 1
 -          fi
 -          rm tmp.patch
@@ -22,7 +23,7 @@
 -          if diff tmp.patch .github/patches/test_suite.patch; then
 -            echo "Mismatch:"
 -            diff tmp.patch .github/patches/test_suite.patch
--            set +e
+-            set -e
 -            exit 1
 -          fi
 -          rm tmp.patch
