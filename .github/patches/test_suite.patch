@@ -4,24 +4,26 @@
 -
 -      - name: Test static analysis template
 -        run: |
--          set +e
 -          pip install -r requirements.txt
--          copier copy -a .github/answers/static_analysis.yml -f . .
+-          copier copy -a .github/answers/static_analysis.yml --force --quiet . .
 -          git diff .github/workflows/static_analysis.yml | tail -n +6 > tmp.patch
+-          set +e
 -          if diff tmp.patch .github/patches/static_analysis.patch; then
 -            exit 1
 -          fi
 -          rm tmp.patch
+-          set -e
 -
 -      - name: Test test suite template
 -        run: |
--          set +e
--          copier copy -a .github/answers/test_suite.yml -f . .
+-          copier copy -a .github/answers/test_suite.yml --force --quiet . .
 -          git diff .github/workflows/test_suite.yml | tail -n +6 > tmp.patch
+-          set +e
 -          if diff tmp.patch .github/patches/test_suite.patch; then
 -            exit 1
 -          fi
 -          rm tmp.patch
+-          set -e
 +      - name: Test suite
 +        run: echo "TODO replace this echo call with your test suite commands"
 \ No newline at end of file
