@@ -111,9 +111,10 @@ project to which templates should be applied.
 The `green-ci` package is (of course) automatically tested with GitHub Actions.
 Workflows are included for Jinja linting and for verifying that (this) JOSS
 submission renders correctly. These workflows were themselves generated using
-`green-ci` templates.
-
-TODO: Add an additional test that checks the workflows can be recovered.
+`green-ci` templates and a further workflow is included that checks that the
+linting workflow and JOSS paper workflow can be generated from the templates.
+For added recursion, the workflow checks that it can itself be generated from
+the test suite template.
 
 # Future development
 
