@@ -5,7 +5,6 @@ tags:
   - continuous development
   - green software
   - jinja
-  - Python
 authors:
   - name: Joseph G. Wallwork
     affiliation: "1"
