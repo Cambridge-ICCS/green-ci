@@ -1,1 +1,3 @@
 djlint
+sphinx
+sphinxcontrib-bibtex
