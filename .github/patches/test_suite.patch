@@ -15,7 +15,7 @@
 -      - name: Test docs build template
 -        run: |
 -          copier copy --answers-file .github/answers/build_docs.yml --force --quiet . .
--          git diff .github/workflows/build_docs.yml | tail -n +6 > tmp.patch
+-          git diff .github/workflows/build_docs.yml | tail -n +6 | grep -v '@@' > tmp.patch
 -          if ! diff tmp.patch .github/patches/build_docs.patch; then
 -            exit 1
 -          fi
