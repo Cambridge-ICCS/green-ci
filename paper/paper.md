@@ -76,9 +76,8 @@ documentation and templates for green GitHub Actions workflows.
 The best practices documentation builds on the work of
 [@Claßen2023;@Alvarez2024;@Saavedra2025;@Laskar2025], as well as best practices
 established within our teams and by the Green Research Software Engineering
-Special Interest Group (Green RSE SIG).
-
-TODO: Deploy documentation and then provide link
+Special Interest Group (Green RSE SIG). This long-form documentation can be
+found on the [`green-ci` webpage](https://cambridge-iccs.github.io/green-ci/).
 
 ## Templating
 
@@ -108,12 +107,13 @@ project to which templates should be applied.
 ### Testing
 
 The `green-ci` package is (of course) automatically tested with GitHub Actions.
-Workflows are included for Jinja linting and for verifying that (this) JOSS
-submission renders correctly. These workflows were themselves generated using
-`green-ci` templates and a further workflow is included that checks that the
-linting workflow and JOSS paper workflow can be generated from the templates.
-For added recursion, the workflow checks that it can itself be generated from
-the test suite template.
+Workflows are included for Jinja linting, building and deploying the
+documentation and webpage, and for verifying that (this) JOSS submission renders
+correctly. These workflows were themselves generated using `green-ci` templates
+and a further workflow is included that checks that the linting, documentation,
+and JOSS paper workflows can be generated from the templates. For added
+recursion, the workflow checks that it can itself be generated from the test
+suite template.
 
 # Future development
 
