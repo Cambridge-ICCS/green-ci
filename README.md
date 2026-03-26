@@ -50,18 +50,32 @@ You can then modify the workflow files to suit your specific needs,
 such as changing the triggers, adding or removing jobs, and adjusting the time
 limits.
 
-You will need to `pip install copier`, then you can create a new module via:
-
+First install the dependencies for `green-ci`, which are encapsulated in the
+`requirements.txt` file. To install with [`pip`](https://pypi.org/project/pip/),
+simply run
 ```bash
-copier copy https://github.com/Cambridge-ICCS/green-ci.git /path/to/my-project
+pip install -r requirements.txt
+```
+You can also install via
+```bash
+uv pip install -r requirements.txt
+```
+[`uv`](https://docs.astral.sh/uv/) installed.
+
+Once the dependencies have been installed, you can add workflows to your project
+that follow best practices for Green CI/CD by running the `green-ci` script:
+```bash
+./green-ci /path/to/project
+```
+To see the full list of arguments, run
+```bash
+./green-ci --help
 ```
 
 > [!NOTE]
 > You will be prompted to enter some information, such as the triggers for the
 > workflow, the timeout limits, and whether this workflow should be carbon aware
 > (extra monitoring for energy usage).
-
-You can also use it via `uvx copier` if you have [`uv`](https://docs.astral.sh/uv/) installed.
 
 ## Best practices
 
