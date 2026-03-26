@@ -1,0 +1,24 @@
+     # The timeout minutes for the job to complete
+     timeout-minutes: 15
+     env:
+-      BUILD_DIR: build/html
++      BUILD_DIR: "TODO replace this string with the path to the build directory"
+ 
+     # Steps represent a sequence of tasks that will be executed as part of the job
+     steps:
+@@ -48,7 +48,7 @@ jobs:
+         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+ 
+       - name: Build documentation
+-        run: make html
++        run: echo "TODO replace this echo call with your docs build commands"
+ 
+       - name: Upload Artifact
+         uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
+@@ -81,4 +81,4 @@ jobs:
+     steps:
+       - name: Deploy to GitHub Pages
+         id: deployment
+-        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e #v4
++        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e #v4
+\ No newline at end of file

@@ -1,0 +1,20 @@
+# Answers to be passed to the docs build workflow during testing
+_commit: a6fbcba
+_src_path: .
+build_docs_timeout: 15
+build_sys_file_paths:
+- 'copier.yml'
+- 'docs/conf.py'
+- 'docs/Makefile'
+carbon_aware: false
+deploy_docs: true
+docs_file_paths:
+- 'docs/*.rst'
+joss_render_timeout: 5
+joss_upload_timeout: 5
+requirements_file_paths:
+- requirements-dev.txt
+source_file_paths:
+- 'docs/*.rst'
+static_analysis_timeout: 5
+test_suite_timeout: 15
