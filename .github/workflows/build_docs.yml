@@ -49,6 +49,7 @@ jobs:
 
       - name: Build documentation
         run: |
+          pip install -r requirements-dev.txt
           cd docs
           make html
 

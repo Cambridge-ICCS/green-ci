@@ -11,6 +11,7 @@
  
        - name: Build documentation
 -        run: |
+-          pip install -r requirements-dev.txt
 -          cd docs
 -          make html
 +        run: echo "TODO replace this echo call with your docs build commands"
