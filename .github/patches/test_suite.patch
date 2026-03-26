@@ -21,6 +21,13 @@
 -          fi
 -          rm tmp.patch
 -
+-      - name: Test JOSS paper template
+-        run: |
+-          copier copy --answers-file .github/answers/render_joss_paper.yml --force --quiet . .
+-          if ! git diff .github/workflows/render_joss_paper.yml; then
+-            exit 1
+-          fi
+-
 -      - name: Test test suite template
 -        run: |
 -          copier copy --answers-file .github/answers/test_suite.yml --force --quiet . .
