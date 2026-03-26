@@ -31,6 +31,9 @@ jobs:
     runs-on: ubuntu-latest
     # The timeout minutes for the job to complete
     timeout-minutes: {{ joss_render_timeout }}
+    # We trust the deploy action with write permissions
+    permissions:
+      id-token: write
 
     steps:
       # Checkout your repository under $GITHUB_WORKSPACE so your job can access it
@@ -56,7 +59,14 @@ jobs:
           journal: joss
           paper-path: paper/paper.md
 
-      {% if carbon_aware %}
+      # Upload the paper build
+      - name: Upload draft PDF
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v4
+        with:
+          name: paper
+          path: paper/paper.pdf
+
+      {%- if carbon_aware -%}
       {%- raw -%}
       # Measure energy consumption of the draft build
       - name: Draft build measurement
@@ -73,52 +83,3 @@ jobs:
         continue-on-error: true
       {%- endraw -%}
       {% endif %}
-
-  # Upload the rendered PDF to GitHub
-  upload-draft:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-    # The timeout minutes for the job to complete
-    timeout-minutes: {{ joss_upload_timeout }}
-
-    # The draft need to have been built first
-    needs: [build-draft]
-
-    # We trust the deploy action with write permissions
-    permissions:
-      id-token: write
-    steps:
-
-      {%- if carbon_aware -%}
-      {% raw %}
-      - name: Start Measurement
-        uses: green-coding-solutions/eco-ci-energy-estimation@862050e4f01f65b1436e5eca18ba4bd85562f0de # v5.0.0
-        with:
-          task: start-measurement
-        continue-on-error: true
-      {%- endraw -%}
-      {% endif %}
-
-      - name: Upload draft PDF
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v4
-        with:
-          name: paper
-          path: paper/paper.pdf
-
-      {% if carbon_aware %}
-      {%- raw -%}
-      # Measure energy consumption of the upload
-      - name: Upload measurement
-        uses: green-coding-solutions/eco-ci-energy-estimation@862050e4f01f65b1436e5eca18ba4bd85562f0de # v5.0.0
-        with:
-          task: get-measurement
-          label: 'pytest'
-        continue-on-error: true
-
-      - name: Show Energy Results
-        uses: green-coding-solutions/eco-ci-energy-estimation@862050e4f01f65b1436e5eca18ba4bd85562f0de # v5.0.0
-        with:
-          task: display-results
-        continue-on-error: true
-      {%- endraw -%}
-      {%- endif -%}
