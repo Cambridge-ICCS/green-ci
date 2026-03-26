@@ -1,7 +1,7 @@
      # The timeout minutes for the job to complete
      timeout-minutes: 15
      env:
--      BUILD_DIR: build/html
+-      BUILD_DIR: docs/build/html
 +      BUILD_DIR: "TODO replace this string with the path to the build directory"
  
      # Steps represent a sequence of tasks that will be executed as part of the job
@@ -10,7 +10,9 @@
          uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
  
        - name: Build documentation
--        run: make html
+-        run: |
+-          cd docs
+-          make html
 +        run: echo "TODO replace this echo call with your docs build commands"
  
        - name: Upload Artifact
