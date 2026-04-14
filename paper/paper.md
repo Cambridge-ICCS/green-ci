@@ -10,9 +10,10 @@ authors:
     affiliation: "1"
     orcid: 0000-0002-3646-091X
     corresponding: true
-  - name: Don Setiawan
+  - name: Landung Setiawan
     affiliation: "2"
-  - name: Marion B. Weinzierl
+    orcid: 0000-0002-1624-2667
+  - name: Marion Weinzierl
     affiliation: "1"
     orcid: 0000-0002-2302-5476
 affiliations:
@@ -57,7 +58,7 @@ to run it and carbon intensity data for the region in which it is being
 performed. EcoCI [@EcoCI] applies the same methodology to CI/CD workflows so
 that users can estimate the carbon footprint of their CI/CD tasks.
 
-There is a wealth of guidance on green practices for CI/CD, including general
+There is some existing guidance on green practices for CI/CD, including general
 guidance [@Claßen2023;@Alvarez2024] as well as guidance for the GitHub Actions
 framework specifically [@Saavedra2025;@Laskar2025]. However, to the best of the
 authors' knowledge, no tool currently exists which provides easily adoptable
@@ -83,12 +84,12 @@ found on the [`green-ci` webpage](https://cambridge-iccs.github.io/green-ci/).
 
 The templating approach is based on `copier` [@Copier]. The `green-ci`
 repository includes several GitHub actions workflow templates making use of
-Jinja syntax. These provide various options for the user to specify, such as the
+Jinja templating engine. These provide various options for the user to specify, such as the
 file extensions for source code, documentation, and build system files, timeouts
 for different tasks, and additional options such as whether to enable carbon
 footprint estimation with EcoCI.
 
-Templates for test suites and static analysis workflows included, so users can
+Templates for test suites and static analysis workflows are included, so users can
 verify that their source code continues to work as expected. While the name
 only mentions CI, the `green-ci` package does apply to CD, too. In particular,
 templates are provided for building documentation and webpage, and for rendering
