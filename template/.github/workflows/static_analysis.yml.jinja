@@ -8,6 +8,7 @@ on:
     branches: [ "main" ]
     paths:
       - '.github/workflows/*.yml'{% for trigger in source_file_paths %}
+      - '{{ trigger | safe }}'{% endfor %}{% for trigger in requirements_file_paths %}
       - '{{ trigger | safe }}'{% endfor %}
 
   # Triggers the workflow on pushes to open pull requests to main with documentation changes
@@ -44,7 +45,7 @@ jobs:
       - name: Checkout code
         with:
           persist-credentials: false
-        uses: actions/checkout@v4
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
       {%- if carbon_aware -%}
       {% raw %}
