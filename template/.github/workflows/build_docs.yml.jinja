@@ -30,12 +30,14 @@ permissions: {}
 # Workflow run - one or more jobs that can run sequentially or in parallel
 jobs:
   # Build the project documentation but do not deploy it
-  test-build:
+  build:
     name: test docs build
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     # The timeout minutes for the job to complete
     timeout-minutes: {{ build_docs_timeout }}
+    env:
+      BUILD_DIR: "TODO replace this string with the path to the build directory"
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -52,10 +54,19 @@ jobs:
         with:
           task: start-measurement
         continue-on-error: true
+      {%- endraw -%}
+      {% endif %}
 
       - name: Build documentation
         run: echo "TODO replace this echo call with your docs build commands"
 
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
+        with:
+          path: {% raw %}${{ env.BUILD_DIR }}{% endraw %}
+
+      {%- if carbon_aware -%}
+      {% raw %}
       # NOTE: To measure energy consumption of specific steps in your workflow,
       # For each step you want to measure, add a measurement step after it with a unique label
       # this will allow the eco-ci tool to collect energy consumption data. Example below.
@@ -73,34 +84,32 @@ jobs:
           task: display-results
         continue-on-error: true
       {%- endraw -%}
-      {%- else -%}
-      {% raw %}
-      - name: Build documentation
-        run: echo "TODO replace this echo call with your docs build commands"
-      {%- endraw -%}
       {% endif %}
 {% if deploy_docs %}
   # Build the project documentation and deploy it
-  build-and-deploy:
-    name: build and deploy docs
+  deploy:
+    name: deploy to GitHub pages
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     # The timeout minutes for the job to complete
     timeout-minutes: {{ build_docs_timeout }}
+    # This job depends on the one above
+    needs: build
+    # Only deploy the docs upon merging into main
+    if: {% raw %}${{ github.ref == 'refs/heads/main' }}{% endraw %}
 
     # We trust the deploy action with write permissions
     permissions:
-      contents: write
-      id-token: write
+      pages: write  # The deploy action is trusted to write to GitHub Pages
+      id-token: write  # The deploy action is trusted to write to GitHub Pages
+
+    # Setup the environment for publishing the docs
+    environment:
+      name: github-pages
+      url: {% raw %}${{ steps.deployment.outputs.page_url }}{% endraw %}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checkout your repository under $GITHUB_WORKSPACE so your job can access it
-      - name: Checkout code
-        with:
-          persist-credentials: false
-        uses: actions/checkout@v4
-
       {%- if carbon_aware -%}
       {% raw %}
       - name: Start Measurement
@@ -108,10 +117,14 @@ jobs:
         with:
           task: start-measurement
         continue-on-error: true
+      {%- endraw -%}
+      {% endif %}
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e #v4
 
-      - name: Build and deploy documentation
-        run: echo "TODO replace this echo call with your docs build and deploy commands"
-
+      {%- if carbon_aware -%}
+      {% raw %}
       # NOTE: To measure energy consumption of specific steps in your workflow,
       # For each step you want to measure, add a measurement step after it with a unique label
       # this will allow the eco-ci tool to collect energy consumption data. Example below.
@@ -128,11 +141,6 @@ jobs:
         with:
           task: display-results
         continue-on-error: true
-      {%- endraw -%}
-      {%- else -%}
-      {% raw %}
-      - name: Build and deploy documentation
-        run: echo "TODO replace this echo call with your docs build and deploy commands"
       {%- endraw -%}
       {%- endif -%}
 {%- endif -%}

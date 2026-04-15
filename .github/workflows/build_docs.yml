@@ -1,0 +1,87 @@
+# Workflow to build and deploy docs for the project
+name: Build docs
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on pushes to the "main" branch, i.e., PR merges
+  push:
+    branches: [ "main" ]
+    paths:
+      - '.github/workflows/build_docs.yml'
+      - 'docs/*.rst'
+
+  # Triggers the workflow on pushes to open pull requests to main with documentation changes
+  pull_request:
+    paths:
+      - '.github/workflows/build_docs.yml'
+      - 'docs/*.rst'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Helps prevent parallel runs of the workflow from overlapping
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+# Write permissions are not needed for all jobs in this workflow
+permissions: {}
+
+# Workflow run - one or more jobs that can run sequentially or in parallel
+jobs:
+  # Build the project documentation but do not deploy it
+  build:
+    name: test docs build
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    # The timeout minutes for the job to complete
+    timeout-minutes: 15
+    env:
+      BUILD_DIR: docs/build/html
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checkout your repository under $GITHUB_WORKSPACE so your job can access it
+      - name: Checkout code
+        with:
+          persist-credentials: false
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+
+      - name: Build documentation
+        run: |
+          pip install -r requirements-dev.txt
+          cd docs
+          make html
+
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
+        with:
+          path: ${{ env.BUILD_DIR }}
+
+  # Build the project documentation and deploy it
+  deploy:
+    name: deploy to GitHub pages
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    # The timeout minutes for the job to complete
+    timeout-minutes: 15
+    # This job depends on the one above
+    needs: build
+    # Only deploy the docs upon merging into main
+    if: ${{ github.ref == 'refs/heads/main' }}
+
+    # We trust the deploy action with write permissions
+    permissions:
+      pages: write  # The deploy action is trusted to write to GitHub Pages
+      id-token: write  # The deploy action is trusted to write to GitHub Pages
+
+    # Setup the environment for publishing the docs
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e #v4
