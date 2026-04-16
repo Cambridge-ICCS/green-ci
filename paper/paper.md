@@ -21,7 +21,7 @@ affiliations:
    index: 1
  - name: Scientific Software Engineering Center, University of Washington, USA
    index: 2
-date: 23 March 2026
+date: 15 April 2026
 bibliography: paper.bib
 
 ---
@@ -116,6 +116,13 @@ and JOSS paper workflows can be generated from the templates. For added
 recursion, the workflow checks that it can itself be generated from the test
 suite template.
 
+## Impact
+
+While `green-ci` is a new tool, it is beginning to be used in the community.
+It was used to inform the continuous integration testing framework for the
+Fortran-based machine learning package, *FTorch* [@FTorch].
+The tool is also gathering GitHub stars.
+
 # Future development
 
 Currently, `green-ci` is restricted to GitHub Actions. In the future, we would
@@ -126,5 +133,10 @@ like to expand to support GitLab CI/CD and Bitbucket Pipelines.
 The Institute of Computing for Climate Science and Scientific Software
 Engineering Center are supported by Schmidt Sciences, LLC. Thank you to members
 of the Green RSE SIG for suggestions and feedback on best practices.
+
+# AI usage statement
+
+No AI tools were used in the writing or reviewing of this paper. GitHub Copilot
+was used in a limited way to assist with debugging the testing setup.
 
 # References
