@@ -51,6 +51,8 @@ CO$_2$ emissions across all sectors, including software development. As
 motivated above, CI/CD forms a key part of software development workflows and
 should also be targeted.
 
+## State of the field
+
 Several green computing tools that are relevant to CI/CD, although these are
 mostly focused on measurement. CodeCarbon [@CodeCarbon] is a Python package,
 which estimates the carbon footprint of a computation based on the energy used
@@ -64,7 +66,7 @@ framework specifically [@Saavedra2025;@Laskar2025]. However, to the best of the
 authors' knowledge, no tool currently exists which provides easily adoptable
 workflow templates following such practices.
 
-# Software description
+# Software design
 
 The `green-ci` package was born out of a hackathon at the Virtual Institute for
 Scientific Software Convening in Cambridge in September 2025. In the hackathon,
@@ -116,7 +118,7 @@ and JOSS paper workflows can be generated from the templates. For added
 recursion, the workflow checks that it can itself be generated from the test
 suite template.
 
-## Impact
+## Research impact statement
 
 While `green-ci` is a new tool, it is beginning to be used in the community.
 It was used to inform the continuous integration testing framework for the
@@ -134,7 +136,7 @@ The Institute of Computing for Climate Science and Scientific Software
 Engineering Center are supported by Schmidt Sciences, LLC. Thank you to members
 of the Green RSE SIG for suggestions and feedback on best practices.
 
-# AI usage statement
+# AI usage disclosure
 
 No AI tools were used in the writing or reviewing of this paper. GitHub Copilot
 was used in a limited way to assist with debugging the testing setup.
