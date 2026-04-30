@@ -15,6 +15,9 @@ developers can reduce the carbon footprint of their work and contribute to
 environmentally friendly software engineering while maintaining efficient and
 reliable CI/CD processes.
 
+The ``green-ci`` tool can be found on GitHub at
+https://github.com/Cambridge-ICCS/green-ci.
+
 Contents
 ^^^^^^^^
 
