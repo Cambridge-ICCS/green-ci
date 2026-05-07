@@ -122,7 +122,8 @@ suite template.
 
 While `green-ci` is a new tool, it is beginning to be used in the community.
 It was used to inform the continuous integration testing framework for the
-Fortran-based machine learning package, *FTorch* [@FTorch].
+Fortran-based machine learning package, *FTorch* [@FTorch] and the MPI debugger
+*mdb* [@mdb].
 The tool is also gathering GitHub stars.
 
 # Future development
