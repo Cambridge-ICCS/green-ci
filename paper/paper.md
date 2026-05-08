@@ -21,7 +21,7 @@ affiliations:
    index: 1
  - name: Scientific Software Engineering Center, University of Washington, USA
    index: 2
-date: 15 April 2026
+date: 08 May 2026
 bibliography: paper.bib
 
 ---
@@ -30,19 +30,25 @@ bibliography: paper.bib
 
 Continuous integration (CI) and continuous deployment (CD) workflows form part
 of the bread-and-butter of software development. They allow developers to
-run test suites, static analysis tools, and build and deploy documentation and
-websites whenever changes are made, thereby ensuring that everything remains
-working as expected. However, while regular testing is good for software
-sustainability, it isn't necessarily good for environmental sustainability.
+automatically run test suites, static analysis tools, and build and deploy
+documentation and websites whenever changes are made, thereby ensuring that
+everything remains working as expected. However, while regular testing is good
+for software sustainability, it isn't necessarily good for environmental
+sustainability.
+
 Green CI/CD is concerned with minimising the resource usage by such workflows,
-while maintaining the same coverage. That is, finding a minimal set of
-conditions such that all code changes give rise to the appropriate responses.
+while maintaining the same coverage. For example, test suites should be run when
+code changes are made to verify that the tests are still satisfied, but should
+not be run when documentation pages are modified in isolation. As another
+example, workflows should be configured such that resource-intensive jobs aren’t
+followed by resource-light jobs - it would be wasteful to run a full test suite
+only to hit a formatting or style issue. The main idea is to reduce resource
+usage by avoiding unnecessary computation.
 
 The `green-ci` package documents best practices for Green CI/CD such as how to
-configure timeouts, concurrency, and triggers. Examples are given for the case
-of workflows set up using the popular GitHub Actions framework. The package also
-provides a templating approach for setting up new GitHub Actions workflows that
-follow Green CI/CD best practices.
+configure timeouts, concurrency, and triggers. We provide example GitHub Actions
+workflows to demonstrate our approach. The package provides templates for
+setting up new GitHub Actions workflows that follow Green CI/CD best practices.
 
 # Statement of need
 
