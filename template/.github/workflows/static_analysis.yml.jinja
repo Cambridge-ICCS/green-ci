@@ -62,7 +62,11 @@ jobs:
       # For each step you want to measure, add a measurement step after it with a unique label
       # this will allow the eco-ci tool to collect energy consumption data. Example below.
       # See https://github.com/green-coding-solutions/eco-ci-energy-estimation?tab=readme-ov-file#github-action-mandatory-and-optional-variables
-      #   - name: Tests measurement
+      # E.g.,
+      #   - name: Existing Tests
+      #     run: pytest -v
+      #
+      #   - name: Measure the tests
       #     uses: green-coding-solutions/eco-ci-energy-estimation@862050e4f01f65b1436e5eca18ba4bd85562f0de # v5.0.0
       #     with:
       #       task: get-measurement
