@@ -217,9 +217,9 @@ change.
 Skip CI
 ^^^^^^^
 
-GitHub Actions supports manually skipping of CI workflows that would be
-triggered by ``push`` or ``pull_request`` by including any of the following
-strings in a commit message:
+GitHub Actions supports manually skipping  CI workflows that would be triggered
+by ``push`` or ``pull_request`` by including any of the following strings in a
+commit message:
 
 * ``[skip ci]``
 * ``[ci skip]``
