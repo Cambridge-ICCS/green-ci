@@ -227,9 +227,11 @@ commit message:
 * ``[skip actions]``
 * ``[actions skip]``
 
-The same warning applies as mentioned in the `Triggers
-<best_practices.html#triggers>`__ section. As such, you should not use this
-notation in the final commit included in a PR before requesting reviews.
+.. warning::
+
+   The same warning applies as mentioned in the `Triggers
+   <best_practices.html#triggers>`__ section. As such, you should not use this
+   notation in the final commit included in a PR before requesting reviews.
 
 See the `GitHub documentation page
 <https://docs.github.com/en/actions/how-tos/manage-workflow-runs/skip-workflow-runs>`__
